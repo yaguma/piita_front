@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { IDocsState } from '../modules/docs';
 import { IDocsActions } from 'src/containers/docsContainer';
+import Header from './header';
 
 type DocsProps = IDocsState & IDocsActions;
 
@@ -14,6 +15,7 @@ export class DocsComponent extends React.Component<DocsProps> {
   public render() {
     return (
       <div className="docs">
+        <Header/>
         <List>
           {this.props.docs.map((doc, index) => {
             return  (
