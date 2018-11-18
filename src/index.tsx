@@ -11,6 +11,7 @@ import store from './store'
 import Theme from './theme'
 import { createBrowserHistory } from 'history';
 import docsContainer from './containers/docsContainer';
+import docContainer from './containers/docContainer';
 
 const history = createBrowserHistory()
 
@@ -19,7 +20,9 @@ ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-            <Route exact={true} path={'/'} component={docsContainer} />
+          <Route exact={true} path={'/'} component={docsContainer} />
+          <Route exact={true} path={'/docs'} component={docsContainer} />
+          <Route exact={true} path={'/docs/:uuid'} component={docContainer} />
         </Switch>
       </ConnectedRouter>
     </Provider>

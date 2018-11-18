@@ -2,15 +2,7 @@ import axios from 'axios';
 import actionCreatorFactory,{ActionCreator, AsyncActionCreators} from 'typescript-fsa';
 import { put, call, takeEvery } from "redux-saga/effects";
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-
-// 記事情報
-export interface IDoc {
-  uuid: string;
-  title: string;
-  author: string;
-  user_id: string;
-  posted_at: Date;
-}
+import { IDoc } from './doc';
 
 export interface IDocAction {
   fetchDocs: AsyncActionCreators<{}, IDoc[], {}>;
@@ -47,7 +39,7 @@ export function* callFetchDocs() {
   }
 }
 
-export function* rootSaga() {
+export function* watchFetchDocs() {
   yield takeEvery(fetchDocsAction.started.type, callFetchDocs);
 }
 

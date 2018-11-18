@@ -3,10 +3,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { IDocsState } from '../modules/docs';
-import { IDocsActions } from 'src/containers/docsContainer';
+import { IDocsDispatchProps } from 'src/containers/docsContainer';
 import Header from './header';
+import { Link } from 'react-router-dom';
 
-type DocsProps = IDocsState & IDocsActions;
+type DocsProps = IDocsState & IDocsDispatchProps;
 
 export class DocsComponent extends React.Component<DocsProps> {
   public componentDidMount() {
@@ -20,7 +21,7 @@ export class DocsComponent extends React.Component<DocsProps> {
           {this.props.docs.map((doc, index) => {
             return  (
               <ListItem key={index} button={true} divider={true}>
-                <ListItemText primary={doc.title} secondary={doc.author + ' ' + doc.posted_at} />
+                <ListItemText primary={<Link to={"/docs/"+doc.uuid}>doc.title</Link>} secondary={doc.author + ' ' + doc.posted_at} />
               </ListItem>
             )
           })}

@@ -1,0 +1,9 @@
+{
+  "docs":{
+    "uuid": "aaa",
+    "title":"hoge",
+    "author":"foo",
+    "body":"foo bar hoge fuga fizz buzz",
+    "posted_at":"2018/11/12 10:50:59"
+  }
+}

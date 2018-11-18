@@ -3,7 +3,9 @@ import { createBrowserHistory } from 'history'
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from "redux-saga";
-import {rootSaga, IDocsState, DocsReducer} from "./modules/docs"
+import { watchFetchDocs, IDocsState, DocsReducer} from "./modules/docs"
+import { DocReducer, IDocState, watchFetchDoc } from './modules/doc';
+import { all, call } from "redux-saga/effects";
 
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -11,13 +13,15 @@ const sagaMiddleware = createSagaMiddleware();
 export interface IAppState {
   router:any,
   docs: IDocsState
+  doc: IDocState
 };
 
 const logger = createLogger();
 
 const reducer = combineReducers<IAppState>({
   router: connectRouter(history),
-  docs: DocsReducer
+  docs: DocsReducer,
+  doc: DocReducer
 });
 
 const initialState = {
@@ -34,5 +38,12 @@ export default createStore(
     )
   )
 );
+
+function* rootSaga() {
+  yield all([
+    call(watchFetchDocs),
+    call(watchFetchDoc),
+  ])
+}
 
 sagaMiddleware.run(rootSaga)

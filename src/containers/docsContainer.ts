@@ -5,7 +5,7 @@ import { actions } from '../modules/docs';
 import {DocsComponent} from '../components/docsComponent';
 
 
-export interface IDocsActions {
+export interface IDocsDispatchProps {
   fetchDocs: () => Action<string>;
   selectDoc: (v: string) => Action<string>;
 }
